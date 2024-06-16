@@ -32,7 +32,8 @@ model Post {
   image  String
   name   String
   price  Int
-  viewer Int
+  viewer Int @default(0)
+  approved Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -40,12 +41,13 @@ model Post {
   author   User   @relation(fields: [authorId], references: [id])
   authorId String @db.ObjectId
 
-  category Category?
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String @unique @db.ObjectId
 
   comments Comment[]
 
-  purchasedSourceCode   PurchasedSourceCode @relation(fields: [purchasedSourceCodeId], references: [id])
-  purchasedSourceCodeId String              @unique @db.ObjectId
+  purchasedSourceCode   PurchasedSourceCode? @relation(fields: [purchasedSourceCodeId], references: [id])
+  purchasedSourceCodeId String?              @unique @db.ObjectId
 }
 
 model Category {
@@ -56,8 +58,7 @@ model Category {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  post   Post   @relation(fields: [postId], references: [id])
-  postId String @unique @db.ObjectId
+  posts   Post[]   
 }
 
 model Comment {
