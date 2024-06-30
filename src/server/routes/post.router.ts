@@ -3,7 +3,7 @@ import {
   changeStatusApprovePostSchema,
   createPostSchema,
   getSectionSchema,
-} from "../../../schema/post.schema";
+} from "@/schema/post.schema";
 import { createRouter, publicProcedure } from "../utils/trpc";
 import * as trpc from "@trpc/server";
 import { mockSection } from "@/utils/constant";
@@ -50,7 +50,7 @@ export const postRouter = createRouter({
             id: postId,
           },
           data: {
-            approved: status,
+            published: status,
           },
         });
         return post;

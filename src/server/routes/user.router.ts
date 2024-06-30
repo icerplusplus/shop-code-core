@@ -6,7 +6,7 @@ import {
   createUserSchema,
   requestOtpSchema,
   verifyOtpSchema,
-} from "../../../schema/user.schema";
+} from "@/schema/user.schema";
 import { decode, encode } from "@/utils/base64";
 import { signJwt } from "@/utils/jwt";
 import { sendLoginEmail } from "@/utils/mailer";
