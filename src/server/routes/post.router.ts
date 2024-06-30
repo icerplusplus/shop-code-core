@@ -2,9 +2,11 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import {
   changeStatusApprovePostSchema,
   createPostSchema,
+  getSectionSchema,
 } from "../../../schema/post.schema";
 import { createRouter, publicProcedure } from "../utils/trpc";
 import * as trpc from "@trpc/server";
+import { mockSection } from "@/utils/constant";
 
 export const postRouter = createRouter({
   "upload-post": publicProcedure
@@ -69,5 +71,102 @@ export const postRouter = createRouter({
         });
       }
     }),
-    
+    "get-section-body-by-request": publicProcedure.input(getSectionSchema).query(async ({ ctx, input }) => {
+      try {
+        switch (input.sectionName) {
+          case "top-websites": {
+            const topWebsites = await ctx.prisma.post.findMany({
+              orderBy: {
+                createdAt: "desc",
+              },
+              take: 12,
+              where: {
+                category: {
+                  name: "Website",
+                },
+              },
+            });
+            return {
+              title: "TOP WEBSITES",
+              viewMoreLink: "/source-code/view-more",
+              posts: topWebsites.length === 0 ? mockSection[1].posts : topWebsites,
+            };
+          }
+          case "top-softwares": {
+            const topSoftwares = await ctx.prisma.post.findMany({
+              orderBy: {
+                createdAt: "desc",
+              },
+              take: 12,
+              where: {
+                category: {
+                  name: "Software",
+                },
+              },
+            });
+            return {
+              title: "TOP SOFTWARES",
+              viewMoreLink: "/source-code/view-more",
+              posts: topSoftwares.length === 0 ? mockSection[2].posts : topSoftwares
+            };
+          }
+          case "top-apps": {
+            const topApps = await ctx.prisma.post.findMany({
+              orderBy: {
+                createdAt: "desc",
+              },
+              take: 12,
+              where: {
+                category: {
+                  slug: "App",
+                },
+              },
+            });
+            return {
+              title: "TOP APPS",
+              viewMoreLink: "/source-code/view-more",
+              posts: topApps.length === 0 ? mockSection[3].posts : topApps
+            };
+          }
+          case "top-games": {
+            const topGames = await ctx.prisma.post.findMany({
+              orderBy: {
+                createdAt: "desc",
+              },
+              take: 12,
+              where: {
+                category: {
+                  slug: "Game",
+                },
+              },
+            });
+            return {
+              title: "TOP GAMES",
+              viewMoreLink: "/source-code/view-more",
+              posts: topGames.length === 0 ? mockSection[4].posts : topGames
+            };
+          }
+        
+          default: {
+            const newSourceCode = await ctx.prisma.post.findMany({
+              orderBy: {
+                createdAt: "desc",
+              },
+              take: 12,
+            });
+            return {
+              title: "NEW SOURCE CODE",
+              viewMoreLink: "/source-code/view-more",
+              posts:
+                newSourceCode.length === 0 ? mockSection[0].posts : newSourceCode,
+            };
+          }
+        }
+      } catch (error) {
+        throw new trpc.TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Something went wrong",
+        });
+      }
+    }),
 });

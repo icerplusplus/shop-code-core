@@ -1,26 +1,33 @@
 "use client";
-import "./index.css";
-import { mockSection } from "@/utils/constant";
 import { Section } from "@/components/shared";
 import React from "react";
+import { trpc } from "@/utils/trpc";
+import "./index.css";
 
-function SourceCodePage() {
+function HomePage() {
+  const [sections, setSections] = React.useState<string[]>([])
+  const getSections = async () => {
+    const sections = await trpc.section["get-all-sections"].useQuery()
+    const secs: any = await sections
+    if(secs.data) setSections(secs.data)
+  };
+  getSections()
+
   return (
     <div className="flex flex-col gap-5">
       {/* Recommended List Section  */}
       <div className="space-y-5">
-        {mockSection.map((section) => (
-          <Section
-            key={section.title}
-            posts={section.posts}
-            title={section.title}
-            viewMoreLink={section.viewMoreLink}
-          />
-        ))}
+        {sections.map((section, i) => {
+          return (
+            <Section
+              key={section+i}
+              section={section}
+            />
+          )
+        })}
       </div>
     </div>
   );
 }
 
-// TODO: add AppRouter generic type
-export default SourceCodePage;
+export default HomePage;

@@ -1,5 +1,5 @@
 import type { AppRouter } from "@/server/routes/app.router";
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
+import { httpBatchLink, loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 import { url } from "@/constants";
 import type { NextPageContext } from "next";
@@ -17,7 +17,7 @@ export interface SSRContext extends NextPageContext {
   status?: number;
 }
 
-export const trpc = createTRPCNext<AppRouter, SSRContext>({
+export const trpc = createTRPCNext<AppRouter>({
   config({ ctx }) {
     const links = [
       loggerLink({
@@ -51,5 +51,4 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
     };
   },
   ssr: false,
-
 });

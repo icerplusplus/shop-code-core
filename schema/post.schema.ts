@@ -13,3 +13,7 @@ export const changeStatusApprovePostSchema = z.object({
   userApprovedId: z.string(),
   status: z.boolean()
 });
+
+export const getSectionSchema = z.object({
+  sectionName: z.string()
+});
