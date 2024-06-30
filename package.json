@@ -2,7 +2,14 @@
   "name": "shop-code-core",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "node seed.js"
+  },
   "scripts": {
+    "migrate": "cd ./src/prisma && npx prisma migrate dev --name init",
+    "seed": "cd ./src/prisma && npx prisma db seed",
+    "generate": "cd ./src/prisma && npx prisma generate",
+    "deploy": "cd ./src/prisma && pnpm run generate && npx prisma migrate deploy",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
