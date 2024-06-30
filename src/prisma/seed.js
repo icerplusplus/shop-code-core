@@ -1,8 +1,8 @@
 
 const { PrismaClient } =  require("@prisma/client");
 const { mockPosts } = require("./mock.js")
-const prisma = new PrismaClient();
 
+let prisma = new PrismaClient();
 async function main() {
   const admin = await prisma.user.upsert({
     where: { email: "m.contact@gmail.com" },
