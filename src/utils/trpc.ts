@@ -25,8 +25,14 @@ export const trpc = createTRPCNext<AppRouter>({
           process.env.NODE_ENV === "development" ||
           (opts.direction === "down" && opts.result instanceof Error),
       }),
-      unstable_httpBatchStreamLink({
-        url
+      httpBatchLink({
+        url,
+        fetch(url, options) {
+          return fetch(url, {
+            ...options,
+            credentials: 'include',
+          });
+        },
       }),
     ];
     return {
