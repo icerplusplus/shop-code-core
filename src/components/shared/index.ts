@@ -1,3 +1,5 @@
 export * from "./SideBar"
 export * from "./Main"
 export * from "./Section"
+export * from "./Devider"
+export * from "./Rating"

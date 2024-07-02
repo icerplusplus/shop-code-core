@@ -8,6 +8,7 @@ import { menus } from "../utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TbBugOff } from "react-icons/tb";
+import { Devider } from "./Devider";
 
 const chelseaMarket = Chelsea_Market({
   weight: "400",
@@ -87,7 +88,7 @@ export const SideBar = () => {
               link={menu.link}
             />
           ))}
-          <div className="border-[0.3px] border-[#3c5994]" />
+          <Devider />
           {menus.centerContent.map((menu) => (
             <SideBarSelector
               key={menu.title}
@@ -96,7 +97,7 @@ export const SideBar = () => {
               link={menu.link}
             />
           ))}
-          <div className="border-[0.3px] border-[#3c5994]" />
+          <Devider />
           {menus.bottomContent.map((menu) => (
             <SideBarSelector
               key={menu.title}

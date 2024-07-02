@@ -107,7 +107,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 
   return (
     <details onClick={() => onFilterBtnClick(title)}>
-      <summary className="inline-flex items-center justify-center space-x-5 px-4 py-3 rounded-lg bg-gradient-to-br from-[#0A274E] to-[#06438F] cursor-pointer">
+      <summary className="inline-flex items-center justify-center space-x-5 px-4 py-3 rounded-lg bg-gradient-to-br from-[#0A274E] to-[#06438F] cursor-pointer shadow-main">
         <p className={`${candal.className} text-white`}>{title}</p>
         <VscChevronDown size={24} color="white" />
       </summary>

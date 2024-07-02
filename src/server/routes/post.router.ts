@@ -72,6 +72,7 @@ export const postRouter = createRouter({
       }
     }),
     "get-section-body-by-request": publicProcedure.input(getSectionSchema).query(async ({ ctx, input }) => {
+      const takeOutput = 10
       try {
         switch (input.sectionName) {
           case "top-websites": {
@@ -79,7 +80,7 @@ export const postRouter = createRouter({
               orderBy: {
                 createdAt: "desc",
               },
-              take: 12,
+              take: takeOutput,
               where: {
                 category: {
                   name: "Website",
@@ -97,7 +98,7 @@ export const postRouter = createRouter({
               orderBy: {
                 createdAt: "desc",
               },
-              take: 12,
+              take: takeOutput,
               where: {
                 category: {
                   name: "Software",
@@ -115,7 +116,7 @@ export const postRouter = createRouter({
               orderBy: {
                 createdAt: "desc",
               },
-              take: 12,
+              take: takeOutput,
               where: {
                 category: {
                   slug: "App",
@@ -133,7 +134,7 @@ export const postRouter = createRouter({
               orderBy: {
                 createdAt: "desc",
               },
-              take: 12,
+              take: takeOutput,
               where: {
                 category: {
                   slug: "Game",
@@ -152,7 +153,7 @@ export const postRouter = createRouter({
               orderBy: {
                 createdAt: "desc",
               },
-              take: 12,
+              take: takeOutput,
             });
             return {
               title: "NEW SOURCE CODE",
