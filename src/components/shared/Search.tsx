@@ -49,7 +49,7 @@ export const Search: React.FC<SearchProps> = ({ className }) => {
           </div>
         </IconButton>
       </div>
-      <div className="hidden md:inline-flex justify-center items-center gap-2 bg-[#17416A] p-3 rounded-xl">
+      <div className="hidden md:inline-flex justify-center items-center gap-2 bg-[#17416A] p-3 rounded-xl shadow-post">
         <CiSearch size={24} color="white" />
         <input
           className="hidden md:block outline-none bg-transparent text-white leading-5"

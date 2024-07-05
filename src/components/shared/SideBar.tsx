@@ -133,7 +133,7 @@ export const SideBar = () => {
         </div>
         <button
           id="mobileMenuBtn"
-          className="bg-gradient-to-br from-[#0A274E] to-[#06438F] h-fit mt-2 ml-2 p-2 shadow-post rounded duration-500 z-40"
+          className="md:invisible bg-gradient-to-br from-[#0A274E] to-[#06438F] h-fit mt-2 ml-2 p-2 shadow-post rounded duration-500 z-50"
         >
           <VscMenu size={24} color="white" />
         </button>
