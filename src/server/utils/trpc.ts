@@ -8,6 +8,7 @@ const t = initTRPC.context<Context>().create({
      * @link https://trpc.io/docs/v11/data-transformers
      */
     transformer,
+    allowOutsideOfServer: true,
     /**
      * @link https://trpc.io/docs/v11/error-formatting
      */
