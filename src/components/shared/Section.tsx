@@ -24,7 +24,7 @@ export function Section({ section }: Readonly<SectionProps>) {
       sectionName: section,
     });
     const postSection = await res;
-    // if (postSection?.data) setData(postSection?.data as SectionType);
+    if (postSection?.data) setData(postSection?.data as SectionType);
   };
   fetchSections();
 
