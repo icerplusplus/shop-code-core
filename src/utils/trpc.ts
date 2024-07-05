@@ -1,5 +1,8 @@
 import type { AppRouter } from "@/server/routes/app.router";
-import { httpBatchLink, loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
+import {
+  loggerLink,
+  unstable_httpBatchStreamLink,
+} from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 import { url } from "@/constants";
 import type { NextPageContext } from "next";
@@ -25,12 +28,12 @@ export const trpc = createTRPCNext<AppRouter>({
           process.env.NODE_ENV === "development" ||
           (opts.direction === "down" && opts.result instanceof Error),
       }),
-      httpBatchLink({
+      unstable_httpBatchStreamLink({
         url,
         fetch(url, options) {
           return fetch(url, {
             ...options,
-            credentials: 'include',
+            credentials: "include",
           });
         },
       }),
@@ -46,6 +49,10 @@ export const trpc = createTRPCNext<AppRouter>({
       links,
       headers() {
         if (ctx?.req) {
+          ctx?.res?.setHeader("Access-Control-Request-Method", "*");
+          ctx?.res?.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
+          ctx?.res?.setHeader("Access-Control-Allow-Headers", "*");
+
           return {
             ...ctx.req.headers,
             "x-ssr": "1",
@@ -53,7 +60,7 @@ export const trpc = createTRPCNext<AppRouter>({
         }
         return {};
       },
-      transformer
+      transformer,
     };
   },
   ssr: false,
