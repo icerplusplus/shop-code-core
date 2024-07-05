@@ -38,6 +38,20 @@ const config: Config = {
         main: "rgba(0, 0, 0, 0.18) 0px 2px 4px",
         post: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
       },
+      keyframes: {
+        expandWidth: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+        unExpandWidth: {
+          '0%': { width: '100%' },
+          '100%': { width: '0%' },
+        },
+      },
+      animation: {
+        expandWidth: 'expandWidth 2000ms ease-in-out forwards',
+        unExpandWidth: 'expandWidth 2000ms ease-in-out forwards',
+      },
     },
   },
   plugins: [],

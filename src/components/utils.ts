@@ -83,3 +83,5 @@ export const menus: Dashboard = {
     },
   ],
 };
+
+export const bgLinearButton = 'bg-gradient-to-br from-[#0A274E] to-[#06438F]'

@@ -2,9 +2,9 @@
 import React from "react";
 import { candal } from "@/utils/fonts";
 import { usePathname } from "next/navigation";
-import { CiSearch } from "react-icons/ci";
 import { VscChevronDown } from "react-icons/vsc";
 import Link from "next/link";
+import { Search } from "./Search";
 
 interface FilterContentsGroup {
   title: string;
@@ -104,7 +104,6 @@ const FilterButton: React.FC<FilterButtonProps> = ({
   onFilterBtnClick,
   isActive,
 }) => {
-
   return (
     <details onClick={() => onFilterBtnClick(title)}>
       <summary className="inline-flex items-center justify-center space-x-5 px-4 py-3 rounded-lg bg-gradient-to-br from-[#0A274E] to-[#06438F] cursor-pointer shadow-main">
@@ -155,15 +154,10 @@ export const Header = () => {
         >
           {!currentPath ? "Source Code" : currentPath}
         </h2>
-        <div>
-          <div className="inline-flex justify-center items-center gap-2 bg-[#17416A] p-3 rounded-xl">
-            <CiSearch size={24} color="white" />
-            <input
-              className="hidden md:block outline-none bg-transparent text-white leading-5"
-              type="text"
-              placeholder="Search..."
-            />
-          </div>
+
+        {/* Search component */}
+        <div className="invisible md:visible">
+          <Search />
         </div>
       </div>
 
