@@ -90,7 +90,7 @@ export const SideBar = () => {
       <div className="flex flex-row justify-start h-full">
         <div
           id="menu"
-          className="absolute top-0 left-[-300px] md:left-0 min-h-full h-full w-[300px] p-4 bg-gradient-to-tl from-[#1b335b] via-[#0b2a58] to-[#0e1b2e] shadow-post duration-500"
+          className="absolute top-0 left-[-300px] md:left-0 min-h-full h-full w-[300px] p-4 z-40 bg-gradient-to-tl from-[#1b335b] via-[#0b2a58] to-[#0e1b2e] shadow-post duration-500"
         >
           <div className="inline-flex items-center">
             <TbBugOff size={38} color="white" />
@@ -133,12 +133,12 @@ export const SideBar = () => {
         </div>
         <button
           id="mobileMenuBtn"
-          className="bg-gradient-to-br from-[#0A274E] to-[#06438F] h-fit mt-2 ml-2 p-2 shadow-post rounded duration-500"
+          className="bg-gradient-to-br from-[#0A274E] to-[#06438F] h-fit mt-2 ml-2 p-2 shadow-post rounded duration-500 z-40"
         >
           <VscMenu size={24} color="white" />
         </button>
         {/* Search component */}
-      <Search className="fixed md:hidden top-0 right-0 z-40"/>
+      <Search className="fixed md:hidden top-0 right-0 z-30"/>
       </div>
     </div>
   );

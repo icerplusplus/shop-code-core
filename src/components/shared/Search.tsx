@@ -35,7 +35,7 @@ export const Search: React.FC<SearchProps> = ({ className }) => {
     <div className={className}>
       <div className="md:hidden" id="iconBtn">
         <IconButton>
-          <div className="flex justify-between items-center gap-2">
+          <div className="flex justify-between items-center gap-2 z-30">
             <CiSearch size={24} color="white" />
             <input
               id="searchInput"
