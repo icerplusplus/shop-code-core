@@ -1,40 +1,47 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { verifyJwt } from '@/utils/jwt'
-import { prisma } from '@/utils/prisma'
+import { NextApiRequest, NextApiResponse } from "next";
+import { verifyJwt } from "@/utils/jwt";
+import { prisma } from "@/utils/prisma";
 
 interface CtxUser {
-  id: string
-  email: string
-  name: string
-  iat: string
-  exp: number
+  id: string;
+  email: string;
+  name: string;
+  iat: string;
+  exp: number;
 }
 
 function getUserFromRequest(req: NextApiRequest) {
-  const token = req.cookies.token
+  const token = req.cookies.token;
 
   if (token) {
     try {
-      const verified = verifyJwt<CtxUser>(token)
-      return verified
+      const verified = verifyJwt<CtxUser>(token);
+      return verified;
     } catch (e) {
-      return null
+      return null;
     }
   }
 
-  return null
+  return null;
 }
 
 export function createContext({
   req,
   res,
 }: {
-  req: NextApiRequest
-  res: NextApiResponse
+  req: NextApiRequest;
+  res: NextApiResponse;
 }) {
-  const user = getUserFromRequest(req)
+  const user = getUserFromRequest(req);
 
-  return { req, res, prisma, user }
+  // Set CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Request-Method", "*");
+  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+  return { req, res, prisma, user };
 }
 
-export type Context = ReturnType<typeof createContext>
+export type Context = ReturnType<typeof createContext>;
