@@ -10,6 +10,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { currencyFormat } from "simple-currency-format";
 import { Devider } from "./Devider";
 import { Rating } from "./Rating";
+import Skeletons from "../Skeletons";
 
 interface SectionProps {
   section: string;
@@ -23,11 +24,11 @@ export function Section({ section }: Readonly<SectionProps>) {
       sectionName: section,
     });
     const postSection = await res;
-    if (postSection?.data) setData(postSection?.data as SectionType);
+    // if (postSection?.data) setData(postSection?.data as SectionType);
   };
   fetchSections();
 
-  if (!data) return <>Loading...</>;
+  if (!data) return <Skeletons count={12} />;
 
   return (
     <div className="flex flex-col h-full space-y-5 mt-4">
